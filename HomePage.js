@@ -20,14 +20,13 @@ import SearchPage from './SearchPage.js';
 
 
 const imageData = [
-    { id: 1, uri: require('./assets/swaaay.gif'), food: 'Food 1', fc: 'Foodcourt 1' },
-    { id: 2, uri: require('./assets/swaaay.gif'), food: 'Food 2', fc: 'Foodcourt 2' },
-    { id: 3, uri: require('./assets/swaaay.gif'), food: 'Food 3', fc: 'Foodcourt 3' },
-    { id: 4, uri: require('./assets/swaaay.gif'), food: 'Food 4', fc: 'Foodcourt 4' },
-    { id: 5, uri: require('./assets/swaaay.gif'), food: 'Food 5', fc: 'Foodcourt 5' },
+    { id: 1, uri: require('./assets/food/chickenrice.png'), food: 'Chicken Rice', fc: 'Foodcourt 1', stall: 'Chicken Rice Stall' },
+    { id: 2, uri: require('./assets/food/laksa.jpg'), food: 'Laksa', fc: 'Foodcourt 2', stall: 'Laksa Stall' },
+    { id: 3, uri: require('./assets/food/burger.webp'), food: 'Burger', fc: 'Foodcourt 3', stall: 'Western Stall' },
+    { id: 4, uri: require('./assets/food/steak.webp'), food: 'Steak', fc: 'Foodcourt 3', stall: 'Western Stall' },
+    { id: 5, uri: require('./assets/food/chickenwing.png'), food: 'Chicken Wing', fc: 'Foodcourt 3', stall: 'Western Stall' },
     // Add more images here
 ];
-//'./assets/swaaay.gif'
 function HomePage() {
 
     const navigation = useNavigation();
@@ -64,7 +63,7 @@ function HomePage() {
                             renderItem={({ item }) => (
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => console.log('Image pressed')} >
+                                    onPress={() => navigation.navigate('Stall', { stallText: item.stall })} >
                                     <View style={styles.itemContainer}>
                                         <Image style={styles.image} source={item.uri} />
                                         <Text style={styles.food}>{item.food}</Text>
@@ -106,7 +105,6 @@ const styles = StyleSheet.create({
     itemContainer: {
         alignItems: 'flex-start',
         padding: 10,
-
     },
     image: {
         width: 150,

@@ -15,11 +15,11 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const imageData = [
-    { id: 1, food: 'Chicken Rice', fc: 'Foodcourt 1', stall: 'Chicken Rice Stall' },
-    { id: 2, food: 'Laksa', fc: 'Foodcourt 2', stall: 'Laksa Stall' },
-    { id: 3, food: 'Burger', fc: 'Foodcourt 3', stall: 'Western Stall' },
-    { id: 4, food: 'Steak', fc: 'Foodcourt 3', stall: 'Western Stall' },
-    { id: 5, food: 'Chicken Wing', fc: 'Foodcourt 3', stall: 'Western Stall' },
+    { id: 1, uri: require('./assets/food/chickenrice.png'), food: 'Chicken Rice', fc: 'Foodcourt 1', stall: 'Chicken Rice Stall' },
+    { id: 2, uri: require('./assets/food/laksa.jpg'), food: 'Laksa', fc: 'Foodcourt 2', stall: 'Laksa Stall' },
+    { id: 3, uri: require('./assets/food/burger.webp'), food: 'Burger', fc: 'Foodcourt 3', stall: 'Western Stall' },
+    { id: 4, uri: require('./assets/food/steak.webp'), food: 'Steak', fc: 'Foodcourt 3', stall: 'Western Stall' },
+    { id: 5, uri: require('./assets/food/chickenwing.png'), food: 'Chicken Wing', fc: 'Foodcourt 3', stall: 'Western Stall' },
     // Add more images here
 ];
 
@@ -45,14 +45,9 @@ function SearchPage() {
         setFilteredData(filteredData);
     }
 
-
-
-
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <KeyboardAvoidingView
-                style={styles.container}
-            >
+            <KeyboardAvoidingView style={styles.container}>
                 <View style={styles.TopQ}>
                     <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                         <Ionicons name="ios-arrow-back" size={48} color="white" />
@@ -71,10 +66,11 @@ function SearchPage() {
                     {searchText !== "" && filteredData.length > 0 && (
                         <FlatList data={filteredData}
                             renderItem={({ item }) => (
-                                <View style={styles.searchResult}>
-                                    <Text style={styles.food}>{item.food}</Text>
-
-                                </View>
+                                <TouchableOpacity onPress={() => navigation.navigate('Stall', { stallText: item.stall })}>
+                                    <View style={styles.searchResult}>
+                                        <Text style={styles.food}>{item.food}</Text>
+                                    </View>
+                                </TouchableOpacity>
                             )}
                         />
                     )}

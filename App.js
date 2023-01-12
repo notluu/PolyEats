@@ -8,12 +8,13 @@ import HomeScreen from './HomeScreen';
 import LoginPage from './LoginPage';
 import HomePage from './HomePage';
 import SearchPage from './SearchPage';
+import Stall from './Stall'
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 
-function HomePageTabs() {
+function Taskbar() {
   return (
 
     <Tab.Navigator screenOptions={{
@@ -40,8 +41,9 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}    >
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="LoginPage" component={LoginPage} />
-        <Stack.Screen name="HomePage" component={HomePageTabs} />
+        <Stack.Screen name="HomePage" component={Taskbar} />
         <Stack.Screen name="SearchPage" component={SearchPage} />
+        <Stack.Screen name="Stall" component={Taskbar} />
       </Stack.Navigator>
     </NavigationContainer>
   );
