@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     justifyContent: 'stretch',
   },
   input: {
-    width: 320,
+    width: '85%',
     height: 44,
     padding: 8,
     borderBottomWidth: 3,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: '#DA5858',
     padding: 10,
-    width: 300,
+    width: '90%',
     borderRadius: 10,
   },
   loginButtonText: {

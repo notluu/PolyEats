@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "polyapp",
-    "slug": "polyapp",
+    "name": "PolyEats",
+    "slug": "PolyEats",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
