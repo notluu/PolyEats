@@ -13,7 +13,7 @@ import {
 
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons, AntDesign, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 
 const imageData = [
@@ -26,20 +26,16 @@ const imageData = [
 ];
 
 
-function AddItemsPage({ route }) {
-    const [count, setCount] = useState(1);
-    const [totalPrice, setTotalPrice] = useState(0);
+function OrderPage({ route }) {
+
 
     const navigation = useNavigation();
-    const { foodText } = route.params;
-    const foodData = imageData.filter(item => item.food === foodText);
-    useEffect(() => {
-        const newTotalPrice = foodData[0].price * count;
-        setTotalPrice(newTotalPrice);
-    }, [count]);
+    const { totalPrice, count, food } = route.params;
+
     const handlePress = () => {
-        navigation.navigate('OrderPage', { totalPrice, count, food: foodData[0].food });
+        navigation.navigate('HomePage');
     }
+
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <KeyboardAvoidingView style={styles.container}>
@@ -51,43 +47,24 @@ function AddItemsPage({ route }) {
                         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
                             <Ionicons name="ios-arrow-back" size={48} color="black" />
                         </TouchableOpacity>
-                        <Text style={styles.stallName}>{foodText}</Text>
-                        <FlatList data={foodData} keyExtractor={item => item.id.toString()} renderItem={({ item }) => (
-                            <View>
-                                <Text style={styles.stallName}>${item.price}</Text>
-                            </View>
-                        )}
-                        />
-                    </View>
-                    <View
-                        style={{
-                            borderBottomColor: 'black',
-                            borderBottomWidth: 1,
-                        }}
-                    />
-                    <View style={styles.amountContainer}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                if (count > 1) {
-                                    setCount(count - 1);
-                                }
-                            }}
-                        >
-                            <AntDesign name="minussquareo" size={48} color="#676767" />
-                        </TouchableOpacity>
                         <View style={styles.squareContainer}>
-                            <Text style={styles.amountContainerText}>{count}</Text>
+                            <Text style={styles.amountText}>{count}x</Text>
                         </View>
-                        <TouchableOpacity onPress={() => setCount(count + 1)}>
-                            <AntDesign name="plussquareo" size={48} color="#676767" />
+                        <Text style={styles.recText}>{food}: ${totalPrice}</Text>
+                    </View>
+                    <View style={styles.orderPageBottom}>
+                        <View
+                            style={{
+                                borderBottomColor: 'black',
+                                borderBottomWidth: 1,
+                            }}
+                        />
+                        <Text style={styles.recText}>Total ${totalPrice}</Text>
+                        <TouchableOpacity style={styles.cartButton} onPress={handlePress}>
+                        <Text style={styles.cartText}>Add to Cart - ${totalPrice}</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.cartContainer}>
-                    <TouchableOpacity style={styles.cartButton} onPress={handlePress}>
-                        <Text style={styles.cartText}>Add to Cart - ${totalPrice}</Text>
-                    </TouchableOpacity>
-                    </View>
-                    
+
                     <View style={styles.cogIcon}>
                         <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
                             <FontAwesome5 name="home" size={32} color="#676767" />
@@ -130,6 +107,8 @@ const styles = StyleSheet.create({
         flex: 4,
         width: '100%',
         backgroundColor: '#fff',
+        alignSelf: 'center',
+        justifyContent: 'flex-start',
 
     },
     image: {
@@ -173,7 +152,7 @@ const styles = StyleSheet.create({
         borderColor: '#676767',
         borderWidth: 4,
         borderRadius: 5,
-        margin: '5%',
+        //margin: '5%',
     },
     amountContainerText: {
         fontSize: 32,
@@ -188,17 +167,33 @@ const styles = StyleSheet.create({
         padding: 10,
         width: '90%',
         borderRadius: 10,
+        
     },
     cartText: {
         fontWeight: 'bold',
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        justifyContent: 'center'
+    },
+    recText: {
+        fontSize: 32,
+        color: 'black',
+        textAlign: 'center',
+        
+    },
+    orderPageBottom : {
+        flex: 1,
+        justifyContent: 'flex-end'
+    },
+    totalFlexContainer: {
+        flex: 1,
+        alignItems: 'row',
     },
     cogIcon: {
         flex: 1,
         justifyContent: 'flex-end',
 
-    }
+    },
 
 });
-export default AddItemsPage;
+export default OrderPage;

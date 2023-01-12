@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import {
-  StyleSheet, 
-  Text, 
-  View, 
-  TextInput, 
-  TouchableOpacity, 
-  TouchableWithoutFeedback, 
-  Keyboard, 
-  KeyboardAvoidingView } from 'react-native';
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
@@ -33,30 +34,33 @@ function LoginPage() {
       >
 
         <View style={styles.TopHalf}>
-          { }
-          <TextInput
-            style={styles.input}
-            placeholder="Username"
-            placeholderTextColor='white'
-            value={username}
-            onChangeText={setUsername}
-          />
+          <Text style={styles.Logo}>PolyEats</Text>
+
         </View>
         <View style={styles.BottomHalf}>
-
-          { }
-          <TextInput
-            style={styles.input}
-            placeholder="Password"
-            placeholderTextColor='white'
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={true}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputUser}
+              placeholder="Username"
+              placeholderTextColor='white'
+              value={username}
+              onChangeText={setUsername}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.inputPass}
+              placeholder="Password"
+              placeholderTextColor='white'
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={true}
+            />
+          </View>
           <View style={styles.loginButtonView}>
-          <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('HomePage')}>
-            <Text style={styles.loginButtonText}>Login</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('HomePage')}>
+              <Text style={styles.loginButtonText}>Login</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -68,11 +72,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'column',
-    justifyContent: 'stretch',
   },
-  input: {
+  inputUser: {
     width: '85%',
-    height: 44,
+    padding: 8,
+    borderBottomWidth: 3,
+    borderBottomColor: '#fff',
+    color: 'white',
+    marginTop: '-20%',
+    alignSelf: 'center',
+    padding: 10,
+    fontSize: 18,
+  },
+  inputPass: {
+    width: '85%',
     padding: 8,
     borderBottomWidth: 3,
     borderBottomColor: '#fff',
@@ -86,16 +99,22 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     backgroundColor: '#DA5858',
+    justifyContent: 'center',
     alignItems: 'center',
-    justifyContent: 'flex-end',
   },
   BottomHalf: {
     flex: 1,
     width: '100%',
     backgroundColor: '#FF5555',
+    justifyContent: 'flex-start'
+  },
+  Logo: {
+    fontSize: 32,
+    fontWeight: 'bold',
   },
   loginButtonView: {
-    paddingTop: 50,
+    paddingTop: '50%',
+    justifyContent: 'flex-end'
   },
   loginButton: {
     alignSelf: 'center',
@@ -108,7 +127,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center'
-  }
+  },
+  cogIcon: {
+    flex: 1,
+    justifyContent: 'flex-end',
+
+  },
 });
 
 export default LoginPage;

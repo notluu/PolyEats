@@ -12,7 +12,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 
 const imageData = [
@@ -23,11 +23,12 @@ const imageData = [
     { id: 5, uri: require('./assets/food/chickenwing.png'), food: 'Chicken Wing', price: '4.20', fc: 'Foodcourt 3', stall: 'Western Stall' },
     // Add more images here
 ];
-const stallData = imageData.filter(item => item.stall === 'Western Stall');
+
 
 function Stall({ route }) {
     const navigation = useNavigation();
     const { stallText } = route.params;
+    const stallData = imageData.filter(item => item.stall === stallText);
 
     return (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -43,21 +44,30 @@ function Stall({ route }) {
                         <Text style={styles.stallName}>{stallText}</Text>
                     </View>
                     <FlatList
-                            data={stallData}
-                            horizontal={true}
-                            keyExtractor={item => item.id.toString()}
-                            renderItem={({ item }) => (
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Stall', { stallText: item.stall })} >
-                                    <View style={styles.itemContainer}>
-                                        <Image style={styles.image} source={item.uri} />
-                                        <Text style={styles.food}>{item.food}</Text>
-                                        <Text style={styles.price}>{item.price}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                        />
+                        data={stallData}
+                        horizontal={true}
+                        keyExtractor={item => item.id.toString()}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                activeOpacity={0.8}
+                                onPress={() => navigation.navigate('AddItemsPage', { foodText: item.food })} >
+                                <View style={styles.itemContainer}>
+                                    <Image style={styles.image} source={item.uri} />
+                                    <Text style={styles.food}>{item.food}</Text>
+                                    <Text style={styles.price}>{item.price}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                    />
+                    
+                    <View style={styles.cogIcon}>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                            <FontAwesome5 name="home" size={32} color="#676767" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                            <FontAwesome5 name="cog" size={32} color="#676767" />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
@@ -92,7 +102,7 @@ const styles = StyleSheet.create({
         flex: 4,
         width: '100%',
         backgroundColor: '#fff',
- 
+
     },
     image: {
         width: 150,
@@ -107,7 +117,6 @@ const styles = StyleSheet.create({
     },
     price: {
         color: '#676767'
-
     },
     searchResult: {
         paddingLeft: '6%',
@@ -124,7 +133,11 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         padding: 10,
     },
+    cogIcon: {
+        flex: 1,
+        justifyContent: 'flex-end',
 
+    }
 
 });
 export default Stall;

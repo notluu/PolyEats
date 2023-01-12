@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect  } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
     FlatList,
     Image,
@@ -12,7 +12,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 const imageData = [
     { id: 1, uri: require('./assets/food/chickenrice.png'), food: 'Chicken Rice', fc: 'Foodcourt 1', stall: 'Chicken Rice Stall' },
@@ -76,6 +76,14 @@ function SearchPage() {
                     )}
 
 
+                    <View style={styles.cogIcon}>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                            <FontAwesome5 name="home" size={32} color="#676767" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                            <FontAwesome5 name="cog" size={32} color="#676767" />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
@@ -123,7 +131,12 @@ const styles = StyleSheet.create({
     },
     backButton: {
         paddingTop: '4%',
-    }
+    },
+    cogIcon: {
+        flex: 1,
+        justifyContent: 'flex-end',
+
+    },
 
 
 });

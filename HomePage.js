@@ -12,7 +12,7 @@ import {
     KeyboardAvoidingView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import SearchPage from './SearchPage.js';
 
@@ -40,13 +40,12 @@ function HomePage() {
             <KeyboardAvoidingView
                 style={styles.container}
                 behavior="padding"
-                keyboardVerticalOffset={60}
             >
                 <View style={styles.TopQ}>
-
+                    <Text style={styles.Logo}>PolyEats</Text>
                 </View>
                 <View style={styles.BottomQ}>
-                    <TouchableOpacity activeOpacity ={1} onPress={() => navigation.navigate('SearchPage')}>
+                    <TouchableOpacity activeOpacity={1} onPress={() => navigation.navigate('SearchPage')}>
                         <View style={styles.searchBar}>
                             <View style={styles.searchBarInnerContainer}>
                                 <Ionicons name="search" size={12} color="#676767" />
@@ -73,6 +72,15 @@ function HomePage() {
                             )}
                         />
                     </View>
+
+                    <View style={styles.cogIcon}>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+                            <FontAwesome5 name="home" size={32} color="#676767" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('HomeScreen')}>
+                            <FontAwesome5 name="cog" size={32} color="#676767" />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </KeyboardAvoidingView>
         </TouchableWithoutFeedback>
@@ -98,6 +106,10 @@ const styles = StyleSheet.create({
         flex: 3,
         width: '100%',
         backgroundColor: '#fff',
+    },
+    Logo: {
+        fontSize: 32,
+        fontWeight: 'bold',
     },
     searchIcon: {
         padding: 5,
@@ -145,6 +157,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         width: '90%',
     },
+    cogIcon: {
+        flex: 1,
+        justifyContent: 'flex-end',
+
+    }
 
 
 

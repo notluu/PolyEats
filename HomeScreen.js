@@ -10,6 +10,7 @@ function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.firstContainer}>
         {/* first color section */}
+        <Text style={styles.Logo}>PolyEats</Text>
       </View>
       <View style={styles.secondContainer}>
         {/* second color section */}
@@ -33,6 +34,8 @@ const styles = StyleSheet.create({
   firstContainer: {
     flex: 2,
     backgroundColor: '#DA5858',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   secondContainer: {
     flex: 1,
@@ -44,6 +47,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  Logo: {
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
   loginButton: {
     backgroundColor: '#FF5555',
     padding: 10,
@@ -54,7 +61,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center'
-  }
+  },
+  cogIcon: {
+    flex: 1,
+    justifyContent: 'flex-end',
+
+  },
 });
 
 export default HomeScreen;
