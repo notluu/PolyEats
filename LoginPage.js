@@ -58,7 +58,7 @@ function LoginPage() {
             />
           </View>
           <View style={styles.loginButtonView}>
-            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('HomePage')}>
+            <TouchableOpacity style={styles.loginButton} onPress={() => navigation.navigate('MainStack')}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
           </View>

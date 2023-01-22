@@ -28,16 +28,17 @@ const imageData = [
 
 function OrderPage({ route }) {
 
-
     const navigation = useNavigation();
-    const { totalPrice, count, food } = route.params;
+    const totalPrice = route.params?.totalPrice || 0;
+    const count = route.params?.count || 0;
+    const food = route.params?.food || 'unknown';
 
     const handlePress = () => {
         navigation.navigate('HomePage');
     }
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>   
             <KeyboardAvoidingView style={styles.container}>
                 <View style={styles.TopQ}>
 
