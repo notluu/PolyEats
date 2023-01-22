@@ -1,20 +1,53 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons, FontAwesome, } from '@expo/vector-icons';
 
-export default function App() {
+import TabBarIcon from './components/TabBarIcon';
+import HomeScreen from './HomeScreen';
+import LoginPage from './LoginPage';
+import HomePage from './HomePage';
+import SearchPage from './SearchPage';
+import Stall from './Stall';
+import AddItemsPage from './AddItemsPage'
+import OrderPage from './OrderPage';
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
+function MainStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Tab.Navigator>
+      <Tab.Screen
+        name="HomePage"
+        component={HomePage}
+        options={{
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="home" />,
+        }}
+      />
+      <Tab.Screen
+        name="OrderPage"
+        component={OrderPage}
+        options={{
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="shoppingcart" />,
+        }}
+      />
+    </Tab.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown:false}} />
+        <Stack.Screen name="LoginPage" component={LoginPage} options={{headerShown:false}} />
+        <Stack.Screen name="MainStack" component={MainStack} options={{headerShown:false}} />
+        <Stack.Screen name="SearchPage" component={SearchPage} />
+        <Stack.Screen name="Stall" component={Stall} />
+        <Stack.Screen name="AddItemsPage" component={AddItemsPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
